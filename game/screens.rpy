@@ -302,7 +302,7 @@ screen navigation():
 
         if main_menu:
 
-            textbutton _("Начать") action Start() #Start
+            textbutton _("Начать сражение") action Start() #Start
 
         else:
 
