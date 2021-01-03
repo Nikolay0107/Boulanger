@@ -28,3 +28,6 @@ label splashscreen:
 label start:
     stop music fadeout 1.0
     jump chapter_01
+
+
+#Тестовый комментарий для гитхаба
