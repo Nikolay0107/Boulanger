@@ -11,7 +11,7 @@ init python:
 
 
 
-#Splashscreen starts.
+#Splashscreen starts. Раздел для заставки
 label splashscreen:
     scene black
     $renpy.pause(2)
@@ -23,7 +23,7 @@ label splashscreen:
 
     return
 
-# The game starts here.
+# The game starts here. Стартуем игру. Запускаем первую главу
 
 label start:
     stop music fadeout 1.0
