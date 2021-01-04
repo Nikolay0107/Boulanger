@@ -29,7 +29,10 @@ define config.version = "1.0"
 ## Text that is placed on the game's about screen. Place the text between the
 ## triple-quotes, and leave a blank line between paragraphs.
 
-define gui.about = _p("""Нужно что то тут написать""")
+define gui.about = _p("""Визуальный роман рассказывает о периоде Третьей
+Французской республики, ее основных действующих лицах и событиях, сыгравших
+важную роль не только во Франции, но и в политических отношениях всей Европы.
+ """)
 
 
 ## A short name for the game used for executables and directories in the built
