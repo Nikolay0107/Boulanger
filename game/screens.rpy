@@ -254,14 +254,14 @@ screen quick_menu():
             xalign 0.5
             yalign 1.0
 
-            textbutton _("Назад") action Rollback() #Back
-            textbutton _("История") action ShowMenu('history') #History
-            textbutton _("Пропустить") action Skip() alternate Skip(fast=True, confirm=True) #Skip
-            textbutton _("Авто") action Preference("auto-forward", "toggle") #Auto
-            textbutton _("Сохранить") action ShowMenu('save') #Save
-            textbutton _("Быстр. Сохранение") action QuickSave() #Q.Save
-            textbutton _("Быстр. Загрузка") action QuickLoad() #Q.Load
-            textbutton _("Настройки") action ShowMenu('preferences') #Prefs
+            textbutton _("Назад") action Rollback()
+            textbutton _("История") action ShowMenu('history')
+            textbutton _("Пропуск") action Skip() alternate Skip(fast=True, confirm=True)
+            textbutton _("Авто") action Preference("auto-forward", "toggle")
+            textbutton _("Сохранить") action ShowMenu('save')
+            textbutton _("Б.Сохр") action QuickSave()
+            textbutton _("Б.Загр") action QuickLoad()
+            textbutton _("Опции") action ShowMenu('preferences')
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
@@ -302,38 +302,38 @@ screen navigation():
 
         if main_menu:
 
-            textbutton _("Начать сражение") action Start() #Start
+            textbutton _("Начать") action Start()
 
         else:
 
-            textbutton _("История") action ShowMenu("history") #History
+            textbutton _("История") action ShowMenu("history")
 
-            textbutton _("Сохранить") action ShowMenu("save") #Save
+            textbutton _("Сохранить") action ShowMenu("save")
 
-        textbutton _("Загрузить") action ShowMenu("load") #Load
+        textbutton _("Загрузить") action ShowMenu("load")
 
-        textbutton _("Настройки") action ShowMenu("preferences") #Preferences
+        textbutton _("Настройки") action ShowMenu("preferences")
 
         if _in_replay:
 
-            textbutton _("Закончить повтор") action EndReplay(confirm=True) #End Replay
+            textbutton _("Завершить повтор") action EndReplay(confirm=True)
 
         elif not main_menu:
 
-            textbutton _("Главное меню") action MainMenu() #Main menu
+            textbutton _("Главное меню") action MainMenu()
 
-        textbutton _("Титры") action ShowMenu("about") #About
+        textbutton _("Об игре") action ShowMenu("about")
 
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Помощь") action ShowMenu("help") #Help
+            textbutton _("Помощь") action ShowMenu("help")
 
         if renpy.variant("pc"):
 
             ## The quit button is banned on iOS and unnecessary on Android and
             ## Web.
-            textbutton _("Выход") action Quit(confirm=not main_menu) #Quit
+            textbutton _("Выход") action Quit(confirm=not main_menu)
 
 
 style navigation_button is gui_button
@@ -390,7 +390,7 @@ style main_menu_frame:
     xsize 280
     yfill True
 
-    background "gui/overlay/main_menu.png" #Фон для меню
+    background "gui/overlay/main_menu.png" ##Фон для меню
 
 style main_menu_vbox:
     xalign 1.0
@@ -474,7 +474,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
     use navigation
 
-    textbutton _("Назад"): #Return
+    textbutton _("Вернуться"):
         style "return_button"
 
         action Return()
@@ -551,20 +551,20 @@ screen about():
     ## This use statement includes the game_menu screen inside this one. The
     ## vbox child is then included inside the viewport inside the game_menu
     ## screen.
-    use game_menu(_("Титры"), scroll="viewport"): #About
+    use game_menu(_("Об игре"), scroll="viewport"):
 
         style_prefix "about"
 
         vbox:
 
             label "[config.name!t]"
-            text _("Version [config.version!t]\n")
+            text _("Версия [config.version!t]\n")
 
             ## gui.about is usually set in options.rpy.
             if gui.about:
                 text "[gui.about!t]\n"
 
-            text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+            text _("Сделано с помощью {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
 ## This is redefined in options.rpy to add text to the about screen.
@@ -592,14 +592,14 @@ screen save():
 
     tag menu
 
-    use file_slots(_("Сохранить")) #Save
+    use file_slots(_("Сохранить"))
 
 
 screen load():
 
     tag menu
 
-    use file_slots(_("Загрузить")) #Load
+    use file_slots(_("Загрузить"))
 
 
 screen file_slots(title):
@@ -666,10 +666,10 @@ screen file_slots(title):
                 textbutton _("<") action FilePagePrevious()
 
                 if config.has_autosave:
-                    textbutton _("{#auto_page}A") action FilePage("auto")
+                    textbutton _("{#auto_page}А") action FilePage("auto")
 
                 if config.has_quicksave:
-                    textbutton _("{#quick_page}Q") action FilePage("quick")
+                    textbutton _("{#quick_page}Б") action FilePage("quick")
 
                 ## range(1, 10) gives the numbers from 1 to 9.
                 for page in range(1, 3): #10
@@ -721,7 +721,7 @@ screen preferences():
 
     tag menu
 
-    use game_menu(_("Настройки"), scroll="viewport"): #Preferences
+    use game_menu(_("Настройки"), scroll="viewport"):
 
         vbox:
 
@@ -732,23 +732,23 @@ screen preferences():
 
                     vbox:
                         style_prefix "radio"
-                        label _("Экран") #Display
-                        textbutton _("В окне") action Preference("display", "window") #Window
-                        textbutton _("Полный экран") action Preference("display", "fullscreen") #Fullscreen
+                        label _("Режим экрана")
+                        textbutton _("Оконный") action Preference("display", "window")
+                        textbutton _("Полный") action Preference("display", "fullscreen")
 
                 vbox:
                     style_prefix "radio"
-                    label _("Сторона отката") #Rollback Side
-                    textbutton _("Отключить") action Preference("rollback side", "disable") #Disable
-                    textbutton _("Лево") action Preference("rollback side", "left") #Left
-                    textbutton _("Право") action Preference("rollback side", "right") #Right
+                    label _("Сторона отката")
+                    textbutton _("Отключено") action Preference("rollback side", "disable")
+                    textbutton _("Левая") action Preference("rollback side", "left")
+                    textbutton _("Правая") action Preference("rollback side", "right")
 
                 vbox:
                     style_prefix "check"
-                    label _("Пропустить") #Skip
-                    textbutton _("Невидимый текст") action Preference("skip", "toggle") #Unseen Text
-                    textbutton _("После выбора") action Preference("after choices", "toggle") #After Choices
-                    textbutton _("Переходы") action InvertSelected(Preference("transitions", "toggle")) #Transitions
+                    label _("Пропуск")
+                    textbutton _("Всего текста") action Preference("skip", "toggle")
+                    textbutton _("После выборов") action Preference("after choices", "toggle")
+                    textbutton _("Переходов") action InvertSelected(Preference("transitions", "toggle"))
 
                 ## Additional vboxes of type "radio_pref" or "check_pref" can be
                 ## added here, to add additional creator-defined preferences.
@@ -761,46 +761,46 @@ screen preferences():
 
                 vbox:
 
-                    label _("Text Speed")
+                    label _("Скорость текста")
 
                     bar value Preference("text speed")
 
-                    label _("Auto-Forward Time")
+                    label _("Скорость авточтения")
 
                     bar value Preference("auto-forward time")
 
                 vbox:
 
                     if config.has_music:
-                        label _("Music Volume")
+                        label _("Громкость музыки")
 
                         hbox:
                             bar value Preference("music volume")
 
                     if config.has_sound:
 
-                        label _("Sound Volume")
+                        label _("Громкость звуков")
 
                         hbox:
                             bar value Preference("sound volume")
 
                             if config.sample_sound:
-                                textbutton _("Test") action Play("sound", config.sample_sound)
+                                textbutton _("Тест") action Play("sound", config.sample_sound)
 
 
                     if config.has_voice:
-                        label _("Voice Volume")
+                        label _("Громкость голоса")
 
                         hbox:
                             bar value Preference("voice volume")
 
                             if config.sample_voice:
-                                textbutton _("Test") action Play("voice", config.sample_voice)
+                                textbutton _("Тест") action Play("voice", config.sample_voice)
 
                     if config.has_music or config.has_sound or config.has_voice:
                         null height gui.pref_spacing
 
-                        textbutton _("Mute All"):
+                        textbutton _("Без звука"):
                             action Preference("all mute", "toggle")
                             style "mute_all_button"
 
@@ -891,7 +891,7 @@ screen history():
     ## Avoid predicting this screen, as it can be very large.
     predict False
 
-    use game_menu(_("History"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0):
+    use game_menu(_("История"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0):
 
         style_prefix "history"
 
@@ -919,7 +919,7 @@ screen history():
                     substitute False
 
         if not _history_list:
-            label _("The dialogue history is empty.")
+            label _("История диалогов пуста.")
 
 
 ## This determines what tags are allowed to be displayed on the history screen.
@@ -980,7 +980,7 @@ screen help():
 
     default device = "keyboard"
 
-    use game_menu(_("Help"), scroll="viewport"):
+    use game_menu(_("Помощь"), scroll="viewport"):
 
         style_prefix "help"
 
@@ -989,11 +989,11 @@ screen help():
 
             hbox:
 
-                textbutton _("Keyboard") action SetScreenVariable("device", "keyboard")
-                textbutton _("Mouse") action SetScreenVariable("device", "mouse")
+                textbutton _("Клавиатура") action SetScreenVariable("device", "keyboard")
+                textbutton _("Мышь") action SetScreenVariable("device", "mouse")
 
                 if GamepadExists():
-                    textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")
+                    textbutton _("Геймпад") action SetScreenVariable("device", "gamepad")
 
             if device == "keyboard":
                 use keyboard_help
@@ -1007,100 +1007,100 @@ screen keyboard_help():
 
     hbox:
         label _("Enter")
-        text _("Advances dialogue and activates the interface.")
+        text _("Прохождение диалогов, активация интерфейса.")
 
     hbox:
-        label _("Space")
-        text _("Advances dialogue without selecting choices.")
+        label _("Пробел")
+        text _("Прохождение диалогов без возможности делать выбор.")
 
     hbox:
-        label _("Arrow Keys")
-        text _("Navigate the interface.")
+        label _("Стрелки")
+        text _("Навигация по интерфейсу.")
 
     hbox:
-        label _("Escape")
-        text _("Accesses the game menu.")
+        label _("Esc")
+        text _("Вход в игровое меню.")
 
     hbox:
         label _("Ctrl")
-        text _("Skips dialogue while held down.")
+        text _("Пропускает диалоги, пока зажат.")
 
     hbox:
         label _("Tab")
-        text _("Toggles dialogue skipping.")
+        text _("Включает режим пропуска.")
 
     hbox:
         label _("Page Up")
-        text _("Rolls back to earlier dialogue.")
+        text _("Откат назад по сюжету игры.")
 
     hbox:
         label _("Page Down")
-        text _("Rolls forward to later dialogue.")
+        text _("Откатывает предыдущее действие вперёд.")
 
     hbox:
         label "H"
-        text _("Hides the user interface.")
+        text _("Скрывает интерфейс пользователя.")
 
     hbox:
         label "S"
-        text _("Takes a screenshot.")
+        text _("Делает снимок экрана.")
 
     hbox:
         label "V"
-        text _("Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}.")
+        text _("Включает поддерживаемый {a=https://www.renpy.org/l/voicing}синтезатор речи{/a}.")
 
 
 screen mouse_help():
 
     hbox:
-        label _("Left Click")
-        text _("Advances dialogue and activates the interface.")
+        label _("Левый клик")
+        text _("Прохождение диалогов, активация интерфейса.")
 
     hbox:
-        label _("Middle Click")
-        text _("Hides the user interface.")
+        label _("Клик колёсиком")
+        text _("Скрывает интерфейс пользователя.")
 
     hbox:
-        label _("Right Click")
-        text _("Accesses the game menu.")
+        label _("Правый клик")
+        text _("Вход в игровое меню.")
 
     hbox:
-        label _("Mouse Wheel Up\nClick Rollback Side")
-        text _("Rolls back to earlier dialogue.")
+        label _("Колёсико вверх\nКлик на сторону отката")
+        text _("Откат назад по сюжету игры.")
 
     hbox:
-        label _("Mouse Wheel Down")
-        text _("Rolls forward to later dialogue.")
+        label _("Колёсико вниз")
+        text _("Откатывает предыдущее действие вперёд.")
 
 
 screen gamepad_help():
 
     hbox:
-        label _("Right Trigger\nA/Bottom Button")
-        text _("Advances dialogue and activates the interface.")
+        label _("Правый триггер\nA/Нижняя кнопка")
+        text _("Прохождение диалогов, активация интерфейса.")
 
     hbox:
-        label _("Left Trigger\nLeft Shoulder")
-        text _("Rolls back to earlier dialogue.")
+        label _("Левый Триггер\nЛевый Бампер")
+        text _("Откат назад по сюжету игры.")
 
     hbox:
-        label _("Right Shoulder")
-        text _("Rolls forward to later dialogue.")
+        label _("Правый бампер")
+        text _("Откатывает предыдущее действие вперёд.")
 
 
     hbox:
-        label _("D-Pad, Sticks")
-        text _("Navigate the interface.")
+        label _("Крестовина, Стики")
+        text _("Навигация по интерфейсу.")
 
     hbox:
         label _("Start, Guide")
-        text _("Accesses the game menu.")
+        text _("Вход в игровое меню.")
 
     hbox:
-        label _("Y/Top Button")
-        text _("Hides the user interface.")
+        label _("Y/Верхняя кнопка")
+        text _("Скрывает интерфейс пользователя.")
 
-    textbutton _("Calibrate") action GamepadCalibrate()
+    textbutton _("Калибровка") action GamepadCalibrate()
 
 
 style help_button is gui_button
@@ -1165,8 +1165,8 @@ screen confirm(message, yes_action, no_action):
                 xalign 0.5
                 spacing 100
 
-                textbutton _("Yes") action yes_action
-                textbutton _("No") action no_action
+                textbutton _("Да") action yes_action
+                textbutton _("Нет") action no_action
 
     ## Right-click and escape answer "no".
     key "game_menu" action no_action
@@ -1212,7 +1212,7 @@ screen skip_indicator():
         hbox:
             spacing 6
 
-            text _("Skipping")
+            text _("Пропускаю")
 
             text "▸" at delayed_blink(0.0, 1.0) style "skip_triangle"
             text "▸" at delayed_blink(0.2, 1.0) style "skip_triangle"
@@ -1432,10 +1432,10 @@ screen quick_menu():
             xalign 0.5
             yalign 1.0
 
-            textbutton _("Back") action Rollback()
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Menu") action ShowMenu()
+            textbutton _("Назад") action Rollback()
+            textbutton _("Пропуск") action Skip() alternate Skip(fast=True, confirm=True)
+            textbutton _("Авто") action Preference("auto-forward", "toggle")
+            textbutton _("Меню") action ShowMenu()
 
 
 style window:
