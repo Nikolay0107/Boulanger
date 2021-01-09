@@ -9,7 +9,9 @@ init python:
     config.window_hide_transition = dissolve
     config.window_show_transition = dissolve
 
-
+    #объявили каналы аудио для одновременного проигрывания эффектов
+    renpy.music.register_channel("channel_1", loop=False)
+    renpy.music.register_channel("channel_2", loop=False)
 
 #Splashscreen starts. Раздел для заставки
 label splashscreen:
