@@ -13,6 +13,7 @@ init python:
     renpy.music.register_channel("channel_1", loop=False)
     renpy.music.register_channel("channel_2", loop=False)
     renpy.music.register_channel("channel_3", loop=False)
+    renpy.music.register_channel("channel_4", loop=False)
 
 #Splashscreen starts. Раздел для заставки
 label splashscreen:
