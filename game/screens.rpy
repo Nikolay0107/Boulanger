@@ -254,10 +254,10 @@ screen quick_menu():
             xalign 0.5
             yalign 1.0
 
-            textbutton _("Назад") action Rollback()
+            #textbutton _("Назад") action Rollback()
             textbutton _("История") action ShowMenu('history')
             textbutton _("Пропуск") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Авто") action Preference("auto-forward", "toggle")
+            #textbutton _("Авто") action Preference("auto-forward", "toggle")
             textbutton _("Сохранить") action ShowMenu('save')
             textbutton _("Б.Сохр") action QuickSave()
             textbutton _("Б.Загр") action QuickLoad()
@@ -738,12 +738,12 @@ screen preferences():
                         textbutton _("Оконный") action Preference("display", "window")
                         textbutton _("Полный") action Preference("display", "fullscreen")
 
-                vbox:
-                    style_prefix "radio"
-                    label _("Сторона отката")
-                    textbutton _("Отключено") action Preference("rollback side", "disable")
-                    textbutton _("Левая") action Preference("rollback side", "left")
-                    textbutton _("Правая") action Preference("rollback side", "right")
+                #vbox:
+                #    style_prefix "radio"
+                #    label _("Сторона отката")
+                #    textbutton _("Отключено") action Preference("rollback side", "disable")
+                #    textbutton _("Левая") action Preference("rollback side", "left")
+                #    textbutton _("Правая") action Preference("rollback side", "right")
 
                 vbox:
                     style_prefix "check"
@@ -1031,13 +1031,13 @@ screen keyboard_help():
         label _("Tab")
         text _("Включает режим пропуска.")
 
-    hbox:
-        label _("Page Up")
-        text _("Откат назад по сюжету игры.")
+    #hbox:
+    #    label _("Page Up")
+    #    text _("Откат назад по сюжету игры.")
 
-    hbox:
-        label _("Page Down")
-        text _("Откатывает предыдущее действие вперёд.")
+    #hbox:
+    #    label _("Page Down")
+    #    text _("Откатывает предыдущее действие вперёд.")
 
     hbox:
         label "H"
@@ -1066,13 +1066,13 @@ screen mouse_help():
         label _("Правый клик")
         text _("Вход в игровое меню.")
 
-    hbox:
-        label _("Колёсико вверх\nКлик на сторону отката")
-        text _("Откат назад по сюжету игры.")
+    #hbox:
+    #    label _("Колёсико вверх\nКлик на сторону отката")
+    #    text _("Откат назад по сюжету игры.")
 
-    hbox:
-        label _("Колёсико вниз")
-        text _("Откатывает предыдущее действие вперёд.")
+    #hbox:
+    #    label _("Колёсико вниз")
+    #    text _("Откатывает предыдущее действие вперёд.")
 
 
 screen gamepad_help():
@@ -1434,7 +1434,7 @@ screen quick_menu():
             xalign 0.5
             yalign 1.0
 
-            textbutton _("Назад") action Rollback()
+            #textbutton _("Назад") action Rollback()
             textbutton _("Пропуск") action Skip() alternate Skip(fast=True, confirm=True)
             textbutton _("Авто") action Preference("auto-forward", "toggle")
             textbutton _("Меню") action ShowMenu()
